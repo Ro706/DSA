@@ -1,16 +1,20 @@
 //right angle triangle right side
-#include<stdio.h>
-int main(){
-	int row = 5,col = 5;
-	for (int row =0;row <= 5;row++){
-		for (int col = 0;col<(5-row);col++){
-			printf(" ");
-		}
-		for(int k = 5-row;k<5;k++){
-		 	printf("* ");
-		}
-		
-		printf("\n");
-	}
-	return 0;
+#include <stdio.h>
+int main()
+{
+    int height = 5; 
+    for (int i = 0; i < height; i++) 
+    {
+        for (int j = 0; j < height - i - 1; j++) 
+        {
+            printf("  "); 
+        }
+        for (int k = 0; k <= i; k++) 
+        {
+            printf("*");  
+        }
+        printf("\n");
+    }
+    return 0;
 }
+
