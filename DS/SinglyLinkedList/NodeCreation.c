@@ -12,5 +12,5 @@ void main() {
     printf("Enter element of second node : ");
     scanf("%d", &x);
     first -> next -> data = x;
-    printf("The list is : %d --> %d --> NULL\n", first -> data, first -> next -> data);
+    printf("The list is : %d --> %d --> NULL\n", first -> data, first -> next -> data );
 }
