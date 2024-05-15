@@ -1,4 +1,3 @@
----
 # Data Structures and Algorithms (DSA)
 
 ## What is DSA?
