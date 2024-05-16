@@ -50,4 +50,74 @@ Suppose we have the following singly linked list:
 
 Remember that there are other types of linked lists (such as doubly linked lists and circular linked lists), each with its own characteristics and use cases.
 
+## Circular Linked List
+
+A **circular linked list** is a variation of the linked list in which the last node points back to the first node instead of pointing to `NULL`. This creates a circular loop in the linked list.
+
+### Characteristics
+- The `next` pointer of the last node points to the first node.
+- There is no `NULL` at the end of the list.
+- Can be singly or doubly linked.
+
+### Advantages
+- Circular linked lists are useful for applications where the entire list is to be repeatedly traversed (e.g., round-robin scheduling).
+- Easier to manage when the list is manipulated by the tail, as you always have access to the head through the tail.
+
+### Operations
+#### Insertion
+- **At the beginning**: Adjust the `next` of the new node to point to the head and update the last node's `next` to the new head.
+- **At the end**: Adjust the `next` of the last node to point to the new node, and the `next` of the new node to point to the head.
+
+#### Deletion
+- **From the beginning**: Adjust the `next` of the last node to point to the second node and free the original head.
+- **From the end**: Traverse to the second last node, adjust its `next` to point to the head, and free the last node.
+
+### Example
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *head;
+
+    if (*head == NULL) {
+        newNode->next = newNode;
+        *head = newNode;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != *head)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    if (head != NULL) {
+        do {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        } while (temp != head);
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    insertAtEnd(&head, 10);
+    insertAtEnd(&head, 20);
+    insertAtEnd(&head, 30);
+
+    printf("Circular Linked List: ");
+    display(head);
+
+    return 0;
+}
+
 ---
