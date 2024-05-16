@@ -119,5 +119,90 @@ int main() {
 
     return 0;
 }
+```
+
+# Doubly Linked List
+
+A **doubly linked list** is a type of linked list in which each node contains three fields: 
+- A data part
+- Two pointers, `next` and `prev`, which point to the next node and the previous node in the sequence, respectively.
+
+## Characteristics
+
+- **Bidirectional Traversal**: Each node points to both its successor and predecessor.
+- **Memory Usage**: Each node uses more memory compared to a singly linked list due to the additional pointer.
+- **Flexibility**: Nodes can be easily added or removed without reorganizing the entire list.
+
+## Advantages
+
+- **Bi-directional Traversal**: Allows traversal in both forward and backward directions.
+- **Easy Deletion**: Easier to delete a given node when a pointer to the node is given.
+- **More Flexible**: More flexible than singly linked lists for certain operations.
+
+## Operations
+
+### Insertion
+
+- **At the Beginning**: Adjust the `prev` of the current head, the `next` of the new node to the current head, and update the head to the new node.
+- **At the End**: Traverse to the last node, adjust its `next` to the new node, the `prev` of the new node to the last node, and set the new node's `next` to `NULL`.
+
+### Deletion
+
+- **From the Beginning**: Adjust the `prev` of the second node to `NULL` and update the head to the second node.
+- **From the End**: Traverse to the second last node, adjust its `next` to `NULL`, and free the last node.
+
+## Example
+
+Below is an example implementation of a doubly linked list in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition for a doubly linked list node
+struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+};
+
+// Function to insert a new node at the end of the doubly linked list
+void insertAtEnd(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        newNode->prev = NULL;
+        *head = newNode;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+}
+
+// Function to display the doubly linked list
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    insertAtEnd(&head, 10);
+    insertAtEnd(&head, 20);
+    insertAtEnd(&head, 30);
+
+    printf("Doubly Linked List: ");
+    display(head);
+
+    return 0;
+}
 
 ---
